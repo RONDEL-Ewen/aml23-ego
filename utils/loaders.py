@@ -229,7 +229,7 @@ class EpicKitchensDataset(data.Dataset, ABC):
 
             idx_untrimmed = record.start_frame + idx
             try:
-                img = Image.open(os.path.join(data_path, record.untrimmed_video_name, tmpl.format(idx_untrimmed))) \
+                img = Image.open(os.path.join(data_path, record.untrimmed_video_name, record.untrimmed_video_name, tmpl.format(idx_untrimmed))) \
                     .convert('RGB')
             except FileNotFoundError:
                 print("Img not found")
