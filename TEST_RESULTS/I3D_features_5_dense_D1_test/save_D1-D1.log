@@ -1,0 +1,83 @@
+Feature Extraction
+Running with parameters: 
+  action: save
+  name: I3D_features_5_dense
+  modality: ['RGB']
+  total_batch: 128
+  batch_size: 32
+  gpus: None
+  wandb_name: None
+  resume_from: None
+  logname: save_D1-D1.log
+  models_dir: saved_models/I3D_features_5_dense/Feb07_12-43-39
+  train:
+    num_iter: 5000
+    lr_steps: 3000
+    eval_freq: 50
+    num_clips: 1
+    dense_sampling:
+      RGB: True
+    num_frames_per_clip:
+      RGB: 16
+  test:
+    num_clips: 5
+    dense_sampling:
+      RGB: True
+    num_frames_per_clip:
+      RGB: 16
+  dataset:
+    annotations_path: train_val
+    shift: D1-D1
+    workers: 4
+    stride: 2
+    resolution: 224
+    RGB:
+      data_path: ../ek_data/frames
+      tmpl: img_{:010d}.jpg
+      features_name: test_feat_kinetics
+    Event:
+      rgb4e: 6
+  models:
+    RGB:
+      model: I3D
+      normalize: False
+      kwargs:
+      lr_steps: 3000
+      lr: 0.01
+      sgd_momentum: 0.9
+      weight_decay: 1e-07
+      dropout: 0.5
+      resolution: 224
+      weight_i3d_rgb: ./pretrained_i3d/rgb_imagenet.pt
+  split: test
+  save:
+    num_clips: 5
+    dense_sampling:
+      RGB: True
+    num_frames_per_clip:
+      RGB: 5
+  config: configs/I3D_save_feat.yaml
+  experiment_dir: I3D_features_5_dense/Feb07_12-43-39
+  log_dir: TEST_RESULTS/I3D_features_5_dense
+  logfile: TEST_RESULTS/I3D_features_5_dense/save_D1-D1.log
+Instantiating models per modality
+I3D Net	Modality: RGB
+Loading Kinetics weights I3D
+ * Skipping Logits weight for 'logits.conv3d.weight'
+ * Skipping Logits weight for 'logits.conv3d.bias'
+Dataloader for D1-test with 435 samples generated
+[87/435] top1= 12.644% top5 = 71.264%
+[174/435] top1= 12.644% top5 = 62.069%
+[261/435] top1= 12.644% top5 = 63.218%
+[348/435] top1= 13.793% top5 = 63.793%
+[435/435] top1= 13.793% top5 = 65.057%
+Final accuracy: top1 = 13.79%	top5 = 65.06%
+Class 0 = [46/124] = 37.10%
+Class 1 = [0/104] = 0.00%
+Class 2 = [5/52] = 9.62%
+Class 3 = [0/34] = 0.00%
+Class 4 = [0/66] = 0.00%
+Class 5 = [1/13] = 7.69%
+Class 6 = [2/20] = 10.00%
+Class 7 = [6/22] = 27.27%
+Accuracy by averaging class accuracies (same weight for each class): 11.459649221745995%
