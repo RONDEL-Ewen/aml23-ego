@@ -5,7 +5,8 @@ class KMeans:
         self,
         n_clusters = 3,
         max_iter = 300,
-        tol = 1e-4
+        tol = 1e-4,
+        random_state = 42
     ):
         """
         Initialize K-Means algorithm.
