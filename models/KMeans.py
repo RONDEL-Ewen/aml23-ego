@@ -19,6 +19,7 @@ class KMeans:
         self.max_iter = max_iter
         self.tol = tol
         self.centroids = None
+        self.random_state = random_state 
 
     def fit(
         self,
