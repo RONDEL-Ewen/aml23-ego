@@ -73,6 +73,8 @@ class LSTMClassifier(nn.Module):
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
         c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
 
+        x = x.unsqueeze(1)
+
         # Avancer à travers le LSTM
         out, _ = self.lstm(x, (h0, c0))
 
