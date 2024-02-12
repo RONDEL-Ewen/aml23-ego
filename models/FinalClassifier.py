@@ -69,6 +69,9 @@ class LSTMClassifier(nn.Module):
         self,
         x
     ):
+        if x.dim() == 2:
+            x = x.unsqueeze(1)
+
         # Initialiser les états cachés et cellulaires à zéro
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
         c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
@@ -84,5 +87,5 @@ class LSTMClassifier(nn.Module):
         out = self.dropout(out[:, -1, :])
         out = self.relu(out)
         out = self.fc(out)
-        
+
         return out, {}
