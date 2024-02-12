@@ -23,7 +23,7 @@ class MLPClassifier(nn.Module):
         num_classes = 8
     ):
         super(MLPClassifier, self).__init__()
-        self.pool = nn.AdaptiveMaxPool1d(1)
+        #self.pool = nn.AdaptiveMaxPool1d(1)
         self.fc1 = nn.Linear(input_size, hidden_size)
         self.dropout = nn.Dropout(dropout_ratio)
         self.relu = nn.ReLU()
@@ -34,8 +34,8 @@ class MLPClassifier(nn.Module):
         x
     ):
         # Max pooling over the frames
-        x = x.permute(0, 2, 1)  # Change shape to [batch_size, features, frames]
-        x = self.pool(x).squeeze(-1)  # Apply max pooling and remove the last dimension
+        #x = x.permute(0, 2, 1)  # Change shape to [batch_size, features, frames]
+        #x = self.pool(x).squeeze(-1)  # Apply max pooling and remove the last dimension
         x = self.fc1(x)
         x = self.dropout(x)
         x = self.relu(x)
@@ -73,7 +73,7 @@ class LSTMClassifier(nn.Module):
         h0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
         c0 = torch.zeros(self.num_layers, x.size(0), self.hidden_size).to(x.device)
 
-        x = x.unsqueeze(1)
+        #x = x.unsqueeze(1)
 
         # Avancer à travers le LSTM
         out, _ = self.lstm(x, (h0, c0))
