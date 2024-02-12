@@ -40,7 +40,7 @@ class MLPClassifier(nn.Module):
         x = self.dropout(x)
         x = self.relu(x)
         x = self.fc2(x)
-        return x
+        return x, {}
     
 class LSTMClassifier(nn.Module):
 
@@ -83,4 +83,4 @@ class LSTMClassifier(nn.Module):
 
         # Décoder la sortie cachée de la dernière étape de temps
         out = self.fc(out[:, -1, :])
-        return out
+        return out, {}
