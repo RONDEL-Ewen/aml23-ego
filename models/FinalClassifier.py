@@ -76,11 +76,13 @@ class LSTMClassifier(nn.Module):
         #x = x.unsqueeze(1)
 
         # Avancer à travers le LSTM
-        out, _ = self.lstm(x, (h0, c0))
+        out, (hn, cn) = self.lstm(x, (h0, c0))
 
         out = self.dropout(out)
         out = self.relu(out)
 
-        # Décoder la sortie cachée de la dernière étape de temps
-        out = self.fc(out[:, -1, :])
+        out = self.dropout(out[:, -1, :])
+        out = self.relu(out)
+        out = self.fc(out)
+        
         return out, {}
