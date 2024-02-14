@@ -18,28 +18,49 @@ class MLPClassifier(nn.Module):
     def __init__(
         self,
         input_size = 1024,
-        hidden_size = 512,
-        dropout_ratio = 0.5,
-        num_classes = 8
+        hidden_size1 = 512,
+        hidden_size2 = 256,
+        hidden_size3 = 128,
+        num_classes = 8,
+        dropout_ratio = 0.5
     ):
         super(MLPClassifier, self).__init__()
-        #self.pool = nn.AdaptiveMaxPool1d(1)
-        self.fc1 = nn.Linear(input_size, hidden_size)
+
+        self.fc1 = nn.Linear(input_size, hidden_size1)
+        self.bn1 = nn.BatchNorm1d(hidden_size1)
+
+        self.fc2 = nn.Linear(hidden_size1, hidden_size2)
+        self.bn2 = nn.BatchNorm1d(hidden_size2)
+
+        self.fc3 = nn.Linear(hidden_size2, hidden_size3)
+        self.bn3 = nn.BatchNorm1d(hidden_size3)
+
+        self.fc4 = nn.Linear(hidden_size3, num_classes)
+
         self.dropout = nn.Dropout(dropout_ratio)
         self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(hidden_size, num_classes)
         
     def forward(
         self,
         x
     ):
-        # Max pooling over the frames
-        #x = x.permute(0, 2, 1)  # Change shape to [batch_size, features, frames]
-        #x = self.pool(x).squeeze(-1)  # Apply max pooling and remove the last dimension
         x = self.fc1(x)
-        x = self.dropout(x)
+        x = self.bn1(x)
         x = self.relu(x)
+        x = self.dropout(x)
+
         x = self.fc2(x)
+        x = self.bn2(x)
+        x = self.relu(x)
+        x = self.dropout(x)
+
+        x = self.fc3(x)
+        x = self.bn3(x)
+        x = self.relu(x)
+        x = self.dropout(x)
+
+        x = self.fc4(x)
+
         return x, {}
     
 class LSTMClassifier(nn.Module):
