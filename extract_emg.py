@@ -2,6 +2,7 @@ import numpy as np
 import pickle
 import h5py
 import sys
+import os
 
 def get_args():
     """
@@ -112,6 +113,8 @@ def save_data(
     """
     Save data to a pickle file.
     """
+
+    os.makedirs(os.path.dirname(filepath), exist_ok = True)
 
     with open(filepath, 'wb') as f:
         pickle.dump(data, f)
