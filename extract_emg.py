@@ -119,7 +119,7 @@ def save_data(
 def main():
 
     args = get_args()
-    source_filepath = args.get('source_file', './emg_data/2022-06-14_16-38-43_streamLog_actionNet-wearables_S04.hdf5')
+    source_filepath = args.get('source_filepath', './emg_data/2022-06-14_16-38-43_streamLog_actionNet-wearables_S04.hdf5')
     left_filepath = args.get('left_filepath', './emg_data/S04_left.pkl')
     right_filepath = args.get('right_filepath', './emg_data/S04_right.pkl')
     
