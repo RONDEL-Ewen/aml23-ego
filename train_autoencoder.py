@@ -111,7 +111,7 @@ def main():
     #train(model, device, train_loader, optimizer, criterion)
 
     print(len(train_dataset))
-    print(len(train_dataset[0][1][0]))
+    print(train_dataset[0][0].size())
     """
     del train_data
     gc.collect()
