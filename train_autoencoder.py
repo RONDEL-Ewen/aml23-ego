@@ -48,7 +48,7 @@ def prepare_dataset(
         emg_data.append(torch.cat((torch.tensor(sample['emg_left']), torch.tensor(sample['emg_right'])), dim = 1))
         #rgb_frames.append(torch.stack(sample['RGB_frames']))
         frames = torch.stack(sample['RGB_frames'])
-        rgb_frames.append(max_pool_rgb_frames(frames))
+        rgb_frames.append(frames.mean(dim=0))
 
     emg_data = torch.stack(emg_data)
     rgb_frames = torch.stack(rgb_frames)
