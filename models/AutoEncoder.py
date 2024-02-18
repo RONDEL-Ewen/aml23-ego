@@ -2,8 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 #from I3D import InceptionI3d
-import models
-from models.I3D import InceptionI3d
+#import models
+#from models.I3D import InceptionI3d
 
 class AutoEncoder(nn.Module):
 
@@ -15,6 +15,9 @@ class AutoEncoder(nn.Module):
     ):
         
         super(AutoEncoder, self).__init__()
+
+        # Dynamically import InceptionI3d here to avoid circular import problems
+        from models.I3D import InceptionI3d
 
         # Encoder
         self.encoder = InceptionI3d(
