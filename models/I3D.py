@@ -168,6 +168,7 @@ class InceptionI3d(nn.Module):
         self.end_points[end_point] = InceptionI3d.InceptionModule(256 + 320 + 128 + 128, [384, 192, 384, 48, 128, 128],
                                                                   name + end_point)
         if self._final_endpoint == end_point:
+            self.build()
             return
 
         # Fully connected layer implemented using Unit3D (Conv3d 1x1x1)
