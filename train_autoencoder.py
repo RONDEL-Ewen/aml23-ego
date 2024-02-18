@@ -110,6 +110,11 @@ def main():
     train_loader = DataLoader(train_dataset, batch_size = 32, shuffle = True)
     train(model, device, train_loader, optimizer, criterion)
 
+    print(len(train_dataset))
+    print(len(train_dataset[0]))
+    print(len(train_dataset[1]))
+
+    """
     del train_data
     gc.collect()
 
@@ -120,6 +125,7 @@ def main():
 
     del test_data
     gc.collect()
+    """
 
 if __name__ == "__main__":
     main()
