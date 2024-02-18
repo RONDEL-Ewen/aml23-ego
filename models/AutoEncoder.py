@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 #from I3D import InceptionI3d
+import models
 from models.I3D import InceptionI3d
 
 class AutoEncoder(nn.Module):
