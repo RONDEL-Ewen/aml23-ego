@@ -108,7 +108,7 @@ def main():
     train_data = load_data(train_file)
     train_dataset = prepare_dataset(train_data)
     train_loader = DataLoader(train_dataset, batch_size = 32, shuffle = True)
-    train(model, device, train_loader, optimizer, criterion)
+    #train(model, device, train_loader, optimizer, criterion)
 
     print(len(train_dataset))
     print(len(train_dataset[0]))
