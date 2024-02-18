@@ -35,7 +35,7 @@ class AutoEncoder(nn.Module):
             'weight_i3d_rgb': './pretrained_i3d/rgb_imagenet.pt'
         }
         """
-        with open('../configs/I3D_save_feat.yaml', 'r') as file:
+        with open('./configs/I3D_save_feat.yaml', 'r') as file:
             config = yaml.safe_load(file)
         model_config_dict = config['models']['RGB']
         model_config = SimpleNamespace(**model_config_dict)
