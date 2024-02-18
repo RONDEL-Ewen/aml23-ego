@@ -117,11 +117,11 @@ def main():
     train_data = load_data(train_file)
     train_dataset = prepare_dataset(train_data)
     train_loader = DataLoader(train_dataset, batch_size = 32, shuffle = True)
-    #train(model, device, train_loader, optimizer, criterion)
+    train(model, device, train_loader, optimizer, criterion)
 
-    print(len(train_dataset))
-    print(train_dataset[0][0].size())
-    """
+    #print(len(train_dataset))
+    #print(train_dataset[0][0].size())
+    
     del train_data
     gc.collect()
 
@@ -132,7 +132,7 @@ def main():
 
     del test_data
     gc.collect()
-    """
+    
 
 if __name__ == "__main__":
     main()
