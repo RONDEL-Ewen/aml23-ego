@@ -16,13 +16,27 @@ class AutoEncoder(nn.Module):
         
         super(AutoEncoder, self).__init__()
 
-        # Dynamically import InceptionI3d here to avoid circular import problems
-        from models.I3D import InceptionI3d
+        # Dynamically import I3d here to avoid circular import problems
+        from models.I3D import I3D
+
+        model_config = {
+            'model': 'I3D',
+            'dropout': 0.5,
+            'normalize': False,
+            'resolution': 224,
+            'kwargs': {},
+            'lr_steps': 3000,
+            'lr': 0.01,
+            'sgd_momentum': 0.9,
+            'weight_decay': 1e-7,
+            'weight_i3d_rgb': './pretrained_i3d/rgb_imagenet.pt'
+        }
 
         # Encoder
-        self.encoder = InceptionI3d(
+        self.encoder = I3D(
             num_classes = num_classes,
-            final_endpoint = 'Mixed_5c'
+            modality = 'RGB',
+            model_config = model_config
         )  
         self.avgpool = nn.AdaptiveAvgPool3d((1, 1, 1))
         self.dropout = nn.Dropout(dropout_rate)
