@@ -34,7 +34,7 @@ def max_pool_rgb_frames(
     frames
 ):
     
-    frames_pooled = F.max_pool3d(frames.unsqueez(0), kernel_size=(5, 1, 1), stride=(5, 1, 1))
+    frames_pooled = F.max_pool3d(frames.unsqueeze(0), kernel_size=(5, 1, 1), stride=(5, 1, 1))
     return frames_pooled.squeeze(2)
 
 def prepare_dataset(
