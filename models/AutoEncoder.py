@@ -32,7 +32,7 @@ class AutoEncoder(nn.Module):
             'lr': 0.01,
             'sgd_momentum': 0.9,
             'weight_decay': 1e-7,
-            'weight_i3d_rgb': './pretrained_i3d/rgb_imagenet.pt'
+            'weight_i_rgb': './pretrained_i3d/rgb_imagenet.pt'
         }
         """
         with open('./configs/I3D_save_feat.yaml', 'r') as file:
@@ -69,6 +69,7 @@ class AutoEncoder(nn.Module):
         
         # Encoder
         x = self.encoder(x)[0]  # Get the logits
+        print("Shape of x before AdaptiveAvgPool3d:", x.shape)
         x = self.avgpool(x)
         x = self.dropout(x)
         x = self.flatten(x)
