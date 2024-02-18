@@ -120,7 +120,7 @@ def main():
     train(model, device, train_loader, optimizer, criterion)
 
     #print(len(train_dataset))
-    #print(train_dataset[0][0].size())
+    print(f"EMG data dimension: {train_dataset[0][1].size()}")
     
     del train_data
     gc.collect()

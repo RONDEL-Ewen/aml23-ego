@@ -21,20 +21,6 @@ class AutoEncoder(nn.Module):
         # Dynamically import I3d here to avoid circular import problems
         from models.I3D import I3D
 
-        """
-        model_config = {
-            'model': 'I3D',
-            'dropout': 0.5,
-            'normalize': False,
-            'resolution': 224,
-            'kwargs': {},
-            'lr_steps': 3000,
-            'lr': 0.01,
-            'sgd_momentum': 0.9,
-            'weight_decay': 1e-7,
-            'weight_i_rgb': './pretrained_i3d/rgb_imagenet.pt'
-        }
-        """
         with open('./configs/I3D_save_feat.yaml', 'r') as file:
             config = yaml.safe_load(file)
         model_config_dict = config['models']['RGB']

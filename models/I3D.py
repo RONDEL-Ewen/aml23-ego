@@ -43,7 +43,7 @@ class InceptionI3d(nn.Module):
         'Predictions',
     )
 
-    def __init__(self, num_classes=400, final_endpoint='Logits', name='inception_i3d',
+    def __init__(self, num_classes=400, final_endpoint='Mixed_5c', name='inception_i3d', #final_endpoint='Logits'
                  in_channels=3, model_config=None):
         """Initializes I3D model instance.
         Args:
