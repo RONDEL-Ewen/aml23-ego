@@ -111,8 +111,12 @@ def main():
     #train(model, device, train_loader, optimizer, criterion)
 
     print(len(train_dataset))
-    print(len(train_dataset[0]))
-    print(len(train_dataset[1]))
+    print(len(train_dataset[0][0]))
+    print(len(train_dataset[0][1]))
+    print("\n==========\n")
+    print(train_dataset[0][0])
+    print("\n==========\n")
+    print(train_dataset[0][1])
 
     """
     del train_data
