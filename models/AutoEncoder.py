@@ -34,7 +34,7 @@ class AutoEncoder(nn.Module):
 
         # Encoder
         self.encoder = I3D(
-            num_classes = num_classes,
+            num_class = num_classes,
             modality = 'RGB',
             model_config = model_config
         )  
