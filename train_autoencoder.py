@@ -30,6 +30,13 @@ def load_data(
 
     return data
 
+def max_pool_rgb_frames(
+    frames
+):
+    
+    frames_pooled = F.max_pool3d(frames.unsqueez(0), kernel_size=(5, 1, 1), stride=(5, 1, 1))
+    return frames_pooled.squeeze(2)
+
 def prepare_dataset(
     data
 ):
@@ -39,7 +46,9 @@ def prepare_dataset(
 
     for sample in data:
         emg_data.append(torch.cat((torch.tensor(sample['emg_left']), torch.tensor(sample['emg_right'])), dim = 1))
-        rgb_frames.append(torch.stack(sample['RGB_frames']))
+        #rgb_frames.append(torch.stack(sample['RGB_frames']))
+        frames = torch.stack(sample['RGB_frames'])
+        rgb_frames.append(max_pool_rgb_frames(frames))
 
     emg_data = torch.stack(emg_data)
     rgb_frames = torch.stack(rgb_frames)
