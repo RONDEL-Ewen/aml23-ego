@@ -196,11 +196,14 @@ class InceptionI3d(nn.Module):
             if end_point in self.end_points:
                 x = self._modules[end_point](x)  # use _modules to work with dataparallel
 
+        return x
+        """
         x = self.avg_pool(x)
         feat = x.squeeze(-1).squeeze(-1).squeeze(-1)
         x = self.logits(self.dropout(x))
         logits = x.squeeze(3).squeeze(3).squeeze(2)
         return logits, {"features": feat}
+        """
 
     @staticmethod
     def truncated_normal_(tensor, mean=0., std=1.):
