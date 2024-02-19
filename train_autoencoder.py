@@ -145,18 +145,18 @@ def main():
     model = AutoEncoder().to(device)
 
     # Adam Optimizer
-    optimizer = optim.Adam(
-        model.parameters(),
-        lr = 0.001,
-        weight_decay = 1e-5
-    )
-    # SGD Optimizer
-    # optimizer = optim.SGD(
+    #optimizer = optim.Adam(
         #model.parameters(),
-        #lr = 0.01,
-        #momentum = 0.9,
+        #lr = 0.001,
         #weight_decay = 1e-5
     #)
+    # SGD Optimizer
+    optimizer = optim.SGD(
+        model.parameters(),
+        lr = 0.01,
+        momentum = 0.9,
+        weight_decay = 1e-5
+    )
     # RMSprop Optimizer
     # optimizer = optim.RMSprop(
         #model.parameters(),
