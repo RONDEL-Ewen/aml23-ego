@@ -1,4 +1,4 @@
-# Our code for the [Multimodal Egocentric Action Recognition project](https://docs.google.com/document/d/12SDMbO3MgdawRx1C6XhHFtmAwzCXgpGQTElbGx4Qm78/edit?usp=sharing) of Advanced Machine Learning (AML) 2023 - @PoliTo
+# Our code for the [Multimodal Egocentric Action Recognition](https://docs.google.com/document/d/12SDMbO3MgdawRx1C6XhHFtmAwzCXgpGQTElbGx4Qm78/edit?usp=sharing) project - Advanced Machine Learning (AML) 2023 - @PoliTo
 
 Originally forked from [here](https://github.com/EgovisionPolito/aml23-ego).
 
