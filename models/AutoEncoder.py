@@ -59,8 +59,8 @@ class AutoEncoder(nn.Module):
     ):
         
         # Encoder
-        x = self.encoder(x)     #[0]  # Get the logits
-        print("Shape of x before AdaptiveAvgPool3d:", x.shape)
+        x = self.encoder(x)
+        #print("Shape of x before AdaptiveAvgPool3d:", x.shape)
         x = self.avgpool(x)
         x = self.dropout(x)
         x = self.flatten(x)
