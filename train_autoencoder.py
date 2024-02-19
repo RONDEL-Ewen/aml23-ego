@@ -116,11 +116,11 @@ def main():
     
     train_data = load_data(train_file)
     train_dataset = prepare_dataset(train_data)
+    print(f"EMG data dimension: {train_dataset[0][1].size()}")
     train_loader = DataLoader(train_dataset, batch_size = 32, shuffle = True)
     train(model, device, train_loader, optimizer, criterion)
 
     #print(len(train_dataset))
-    print(f"EMG data dimension: {train_dataset[0][1].size()}")
     
     del train_data
     gc.collect()
