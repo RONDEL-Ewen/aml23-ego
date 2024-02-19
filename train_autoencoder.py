@@ -61,7 +61,7 @@ def train(
     train_loader,
     optimizer,
     criterion,
-    epochs = 100
+    epochs = 250
 ):
     
     model.train()
@@ -144,7 +144,25 @@ def main():
     
     model = AutoEncoder().to(device)
 
-    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    # Adam Optimizer
+    optimizer = optim.Adam(
+        model.parameters(),
+        lr = 0.001,
+        weight_decay = 1e-5
+    )
+    # SGD Optimizer
+    # optimizer = optim.SGD(
+        #model.parameters(),
+        #lr = 0.01,
+        #momentum = 0.9,
+        #weight_decay = 1e-5
+    #)
+    # RMSprop Optimizer
+    # optimizer = optim.RMSprop(
+        #model.parameters(),
+        #lr = 0.001,
+        #weight_decay = 1e-5
+    #)
     criterion = torch.nn.MSELoss()
     
     train_data = load_data(train_file)
