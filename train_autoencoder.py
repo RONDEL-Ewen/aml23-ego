@@ -61,7 +61,7 @@ def train(
     train_loader,
     optimizer,
     criterion,
-    epochs = 100
+    epochs = 500
 ):
     
     model.train()
@@ -108,15 +108,31 @@ def test(
     
     model.eval()
     total_loss = 0.0
+    total_cos_sim = 0.0
+    total_eucl_dist = 0.0
+    num_batches = 0
 
     with torch.no_grad():
         for inputs, targets in test_loader:
+
             inputs, targets = inputs.to(device), targets.to(device)
             outputs = model(inputs)
+
             loss = F.mse_loss(outputs, targets)
             total_loss += loss.item()
 
-    print(f"Test Loss: {total_loss/len(test_loader)}")
+            cos_sim = F.cosine_similarity(outputs, targets, dim=1).mean()
+            eucl_dist = F.pairwise_distance(outputs, targets).mean()
+
+            total_cos_sim += cos_sim.item()
+            total_eucl_dist += eucl_dist.item()
+            num_batches += 1
+
+    avg_loss = total_loss / num_batches
+    avg_cos_sim = total_cos_sim / num_batches
+    avg_eucl_dist = total_eucl_dist / num_batches
+
+    print(f"Test: \n\tLoss: {avg_loss} \n\tAverage Cosine Similarity: {avg_cos_sim} \n\tAverage Euclidean Distance: {avg_eucl_dist}\n")
 
 def main():
 
