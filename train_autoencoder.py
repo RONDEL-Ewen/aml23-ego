@@ -153,7 +153,7 @@ def main():
     # SGD Optimizer
     optimizer = optim.SGD(
         model.parameters(),
-        lr = 0.1,
+        lr = 0.001,
         momentum = 0.9,
         weight_decay = 1e-5
     )
