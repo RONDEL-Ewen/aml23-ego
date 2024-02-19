@@ -31,7 +31,12 @@ class AutoEncoder(nn.Module):
             num_class = num_classes,
             modality = 'RGB',
             model_config = model_config
-        )  
+        )
+
+        # Freeze I3D model parameters
+        for param in self.encoder.parameters():
+            param.requires_grad = False
+
         self.avgpool = nn.AdaptiveAvgPool3d((1, 1, 1))
         self.dropout = nn.Dropout(dropout_rate)
         self.flatten = nn.Flatten()
@@ -54,7 +59,7 @@ class AutoEncoder(nn.Module):
     ):
         
         # Encoder
-        x = self.encoder(x)#[0]  # Get the logits
+        x = self.encoder(x)     #[0]  # Get the logits
         print("Shape of x before AdaptiveAvgPool3d:", x.shape)
         x = self.avgpool(x)
         x = self.dropout(x)
