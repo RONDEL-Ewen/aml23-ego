@@ -45,7 +45,7 @@ def prepare_dataset(
     rgb_frames = []
 
     for sample in data:
-        emg_data.append(torch.cat((torch.tensor(sample['emg_left'][-1]), torch.tensor(sample['emg_right'][-1])))) #, dim = 1
+        emg_data.append(torch.cat((torch.tensor(sample['emg_left'][-1], dtype=torch.float), torch.tensor(sample['emg_right'][-1], dtype=torch.float))))
         rgb_frames.append(torch.stack(sample['RGB_frames']).permute(1, 0, 2, 3))
         #frames = torch.stack(sample['RGB_frames'])
         #rgb_frames.append(frames.mean(dim=0))
