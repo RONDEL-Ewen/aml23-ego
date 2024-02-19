@@ -48,6 +48,7 @@ class AutoEncoder(nn.Module):
             num_layers = 1,
             batch_first = True
         )
+        self.bn = nn.BatchNorm1d(512)
         self.fc = nn.Linear(
             512,
             num_emg_features
@@ -68,6 +69,8 @@ class AutoEncoder(nn.Module):
         # Decoder
         x = x.unsqueeze(1)  # Add a dimension for LSTM
         lstm_out, _ = self.lstm(x)
-        x = self.fc(lstm_out[:, -1, :])
+        lstm_out = lstm_out[:, -1, :]
+        x = self.bn(lstm_out)
+        x = self.fc(x)
 
         return x
