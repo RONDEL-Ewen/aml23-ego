@@ -67,9 +67,14 @@ def train(
     model.train()
 
     for epoch in range(epochs):
+
         running_loss = 0.0
+        running_cos_sim = 0.0
+        running_eucl_dist = 0.0
+        num_batches = 0
 
         for inputs, targets in train_loader:
+
             inputs, targets = inputs.to(device), targets.to(device)
             
             optimizer.zero_grad()
@@ -80,8 +85,20 @@ def train(
             
             running_loss += loss.item()
 
+            cos_sim = F.cosine_similarity(outputs, targets, dim=1).mean()
+            eucl_dist = F.pairwise_distance(outputs, targets).mean()
+
+            running_cos_sim += cos_sim.item()
+            running_eucl_dist += eucl_dist.item()
+            num_batches += 1
+
+        # Compute the means for the epoch
+        epoch_loss = running_loss / num_batches
+        epoch_cos_sim = running_cos_sim / num_batches
+        epoch_eucl_dist = running_eucl_dist / num_batches
+
         if (epoch + 1) % 10 == 0:
-            print(f"Epoch {epoch+1}, Loss: {running_loss/len(train_loader)}")
+            print(f"Epoch {epoch+1}: \n\tLoss: {epoch_loss} \n\tCosine Similarity: {epoch_cos_sim} \n\tEuclidean Distance: {epoch_eucl_dist}")
 
 def test(
     model,
@@ -116,7 +133,7 @@ def main():
     
     train_data = load_data(train_file)
     train_dataset = prepare_dataset(train_data)
-    print(f"EMG data dimension: {train_dataset[0][1].size()}")
+    #print(f"EMG data dimension: {train_dataset[0][1].size()}")
     train_loader = DataLoader(train_dataset, batch_size = 32, shuffle = True)
     train(model, device, train_loader, optimizer, criterion)
 
