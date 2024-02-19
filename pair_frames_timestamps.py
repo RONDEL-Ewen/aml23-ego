@@ -36,14 +36,10 @@ def main():
     frames_timestamps = [{'timestamp': ts, 'frame': path} for ts, path in zip(timestamps, frames_paths)]
 
     # Step 4: Save the dictionaries in a '.pkl' file
-    #if not os.path.exists(output_file):
-        #os.makedirs(output_file)
-    
-    #os.makedirs(os.path.dirname(output_file), exist_ok = True)
     with open(output_file, "wb") as f:
         pickle.dump(frames_timestamps, f)
 
-    #print(f"Data saved in {output_file}.")
+    print(f"Data saved in {output_file}.")
 
 if __name__ == '__main__':
     main()

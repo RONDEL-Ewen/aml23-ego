@@ -29,14 +29,7 @@ def load_data(
         data = pickle.load(file)
 
     return data
-"""
-def max_pool_rgb_frames(
-    frames
-):
-    
-    frames_pooled = F.max_pool3d(frames.unsqueeze(0), kernel_size=(5, 1, 1), stride=(5, 1, 1))
-    return frames_pooled.squeeze(2)
-"""
+
 def prepare_dataset(
     data
 ):
@@ -47,8 +40,6 @@ def prepare_dataset(
     for sample in data:
         emg_data.append(torch.cat((torch.tensor(sample['emg_left'][-1], dtype=torch.float), torch.tensor(sample['emg_right'][-1], dtype=torch.float))))
         rgb_frames.append(torch.stack(sample['RGB_frames']).permute(1, 0, 2, 3))
-        #frames = torch.stack(sample['RGB_frames'])
-        #rgb_frames.append(frames.mean(dim=0))
 
     emg_data = torch.stack(emg_data)
     rgb_frames = torch.stack(rgb_frames)
@@ -167,12 +158,9 @@ def main():
     
     train_data = load_data(train_file)
     train_dataset = prepare_dataset(train_data)
-    #print(f"EMG data dimension: {train_dataset[0][1].size()}")
     train_loader = DataLoader(train_dataset, batch_size = 32, shuffle = True)
     train(model, device, train_loader, optimizer, criterion)
 
-    #print(len(train_dataset))
-    
     del train_data
     gc.collect()
 

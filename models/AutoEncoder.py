@@ -1,9 +1,6 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-#from I3D import InceptionI3d
-#import models
-#from models.I3D import InceptionI3d
 import yaml
 from types import SimpleNamespace
 
@@ -61,13 +58,12 @@ class AutoEncoder(nn.Module):
         
         # Encoder
         x = self.encoder(x)
-        #print("Shape of x before AdaptiveAvgPool3d:", x.shape)
         x = self.avgpool(x)
         x = self.dropout(x)
         x = self.flatten(x)
         
         # Decoder
-        x = x.unsqueeze(1)  # Add a dimension for LSTM
+        x = x.unsqueeze(1)
         lstm_out, _ = self.lstm(x)
         lstm_out = lstm_out[:, -1, :]
         x = self.bn(lstm_out)
