@@ -61,7 +61,7 @@ def train(
     train_loader,
     optimizer,
     criterion,
-    epochs = 100
+    epochs = 500
 ):
     
     model.train()
@@ -153,8 +153,8 @@ def main():
     # SGD Optimizer
     optimizer = optim.SGD(
         model.parameters(),
-        lr = 0.001,
-        momentum = 0.9,
+        lr = 0.01,
+        momentum = 0.7,
         weight_decay = 1e-5
     )
     # RMSprop Optimizer
