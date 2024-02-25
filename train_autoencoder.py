@@ -52,7 +52,7 @@ def train(
     train_loader,
     optimizer,
     criterion,
-    epochs = 1000
+    epochs = 100
 ):
     
     model.train()
