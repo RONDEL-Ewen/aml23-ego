@@ -57,16 +57,26 @@ class AutoEncoder(nn.Module):
     ):
         
         # Encoder
+        print(f"Size: {x.size()}")
         x = self.encoder(x)
+        print(f"Size: {x.size()}")
         x = self.avgpool(x)
+        print(f"Size: {x.size()}")
         x = self.dropout(x)
+        print(f"Size: {x.size()}")
         x = self.flatten(x)
+        print(f"Size: {x.size()}")
         
         # Decoder
         x = x.unsqueeze(1)
+        print(f"Size: {x.size()}")
         lstm_out, _ = self.lstm(x)
+        print(f"Size: {x.size()}")
         lstm_out = lstm_out[:, -1, :]
+        print(f"Size: {x.size()}")
         x = self.bn(lstm_out)
+        print(f"Size: {x.size()}")
         x = self.fc(x)
+        print(f"Size: {x.size()}")
 
         return x
